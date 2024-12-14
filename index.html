@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>poojitha-lee</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #1e1e2f;
+            color: #ffffff;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-gradient:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .fade-out {
+            animation: fadeOut 2s forwards;
+        }
+
+        .float-up {
+            animation: floatUp 2s forwards;
+        }
+
+        .zoom-out {
+            animation: zoomOut 7s forwards;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-50px);
+            }
+        }
+
+        @keyframes zoomOut {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="header">Hai</h1>
+    <br>
+    <h2 id="subheader1" style="display: none;">Good afternoon</h2>
+    <br>
+    <h3 id="subheader2" style="display: none;">Hello this is poojitha.</h3>
+    <br>
+
+    <button id="actionButton" class="btn btn-gradient">Click Me!</button>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        $(document).ready(function () {
+            let clickCount = 0;
+
+            $('#actionButton').click(function () {
+                clickCount++;
+
+                if (clickCount === 1) {
+                    // First click: Fade out the "Hai" text
+                    $('#header').addClass('fade-out');
+
+                    // Show the "Good Morning" text and float it up
+                    setTimeout(function () {
+                        $('#header').hide();
+                        $('#subheader1').css('display', 'block').addClass('float-up');
+                    }, 2000);
+
+                    // Highlight the button by fading background darker
+                    $('body').css('background-color', '#121212');
+
+                    // Change button text
+                    setTimeout(function () {
+                        $('#actionButton').text('Click Me Again!');
+                    }, 2000);
+
+                } else if (clickCount === 2) {
+                    // Second click: Fade out "Good Morning" and show the next message
+                    $('#subheader1').addClass('fade-out');
+
+                    setTimeout(function () {
+                        $('#subheader1').hide();
+                        $('#subheader2').css('display', 'block').addClass('float-up');
+                    }, 2000);
+
+                    // Change button text to final state
+                    $('#actionButton').text('Enjoy Your Learning!');
+
+                    // After showing the last text, keep it visible for 5 seconds, then zoom it out
+                    setTimeout(function () {
+                        $('#subheader2').addClass('zoom-out');
+                        setTimeout(function () {
+                            $('#subheader2').hide();
+                            $('#actionButton').text('Thank You!').css('background', 'linear-gradient(45deg, #ff7e5f, #feb47b)');
+                        }, 7000); // Zoom-out animation duration
+                    }, 5000); // Keep last text visible for 5 seconds
+                }
+            });
+        });
+    </script>
+</body>
+</html>
